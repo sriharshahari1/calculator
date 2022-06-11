@@ -26,59 +26,12 @@ function roundNumber(calculation) {
     return rounded;
 }
 
-function calculate (num1,num2,operator) {
-    if(operator == "+") {
-        ans = add(num1,num2);
-    }
-    if(operator == "-") {
-        ans = sub(num1,num2);
-    }
-    if(operator == "*") {
-        ans = mul(num1,num2);
-    }
-    if(operator == "/") {
-        ans = div(num1,num2);
-    }
-    if (ans !== 'divide by zero not possible') {
-        return roundNumber(ans);
-      }
-    return ans;
-}
-
-let btns = document.querySelectorAll('button');
-
-function listenButtons () {
-    btns.forEach((button) => {
-        button.addEventListener('click', () => {
-            if(button.classList.contains('number')){
-                displayNumber(button);
-            }
-            else if(button.classList.contains('operator')){
-                operate(button);
-            }
-            else if(button.id === '='){
-                operate(button);
-            }
-            else if(button.id === 'clear'){
-                clearDisplay('clear');
-            }
-            else if(button.id === 'delete'){
-                clearDisplay('delete');
-            }
-            else if(button.id === '.'){
-                displayDecimal(button);
-            }
-        })
-    })
-}
-listenButtons();
-
 
 function displayNumber(button){
-    if(operator=='=' || output.textContent.includes('divide by zero not possible') || ans== Infinity){
+    if(output.textContent.includes('divide by zero not possible')){
         clearDisplay('clear');
     }
-    if(input.textContent =='0'){
+    if(input.textContent == '0'){
         input.textContent = button.textContent; //not else if here. if is the crct stmt. dont change
     }
     else {
@@ -101,6 +54,26 @@ function operate (button) {
     }
     setEqualsButtonState('disable');
     input.textContent='';
+}
+
+
+function calculate (num1,num2,operator) {
+    if(operator == "+") {
+        ans = add(num1,num2);
+    }
+    if(operator == "-") {
+        ans = sub(num1,num2);
+    }
+    if(operator == "*") {
+        ans = mul(num1,num2);
+    }
+    if(operator == "/") {
+        ans = div(num1,num2);
+    }
+    if (ans !== 'divide by zero not possible') {
+        return roundNumber(ans);
+      }
+    return ans;
 }
 
 function calcResult(operator) {
@@ -151,3 +124,31 @@ function setEqualsButtonState(state) {
       equals.removeAttribute('disabled', '');
     }
   }
+
+
+let btns = document.querySelectorAll('button');
+function listenButtons () {
+   btns.forEach((button) => {
+       button.addEventListener('click', () => {
+           if(button.classList.contains('number')){
+                displayNumber(button);
+            }
+            else if(button.classList.contains('operator')){
+                operate(button);
+            }
+            else if(button.id === '='){
+                operate(button);
+            }
+            else if(button.id === 'clear'){
+                clearDisplay('clear');
+            }
+            else if(button.id === 'delete'){
+                clearDisplay('delete');
+            }
+            else if(button.id === '.'){
+                displayDecimal(button);
+            }
+        })
+    })
+}
+listenButtons();
