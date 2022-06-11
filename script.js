@@ -5,7 +5,7 @@ let num1='';
 let num2='';
 let operator='';
 let result='';
-let ans=''
+let ans='';
 
 
 //basic math functions using arrow functions
@@ -42,15 +42,19 @@ function displayNumber(button){
 
 
 function operate (button) {
-    if(num1=='') {
+    if(num1==='') {
         num1=input.textContent;
+        console.log(num1);
         operator=button.id;
     }
-    else if(num1 !='' && operator != ''){
+    else if(num1 !=='' && operator !== ''){
         num2=input.textContent;
         output.textContent = calcResult(operator);
         num1=calculate(num1,num2,operator);
-        operator=button.id;  
+        console.log("num2:" + num2);
+        console.log("num1:" + num1);
+        operator=button.id;
+        console.log(operator);  
     }
     setEqualsButtonState('disable');
     input.textContent='';
@@ -72,7 +76,7 @@ function calculate (num1,num2,operator) {
     }
     if (ans !== 'divide by zero not possible') {
         return roundNumber(ans);
-      }
+    }
     return ans;
 }
 
