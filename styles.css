@@ -10,12 +10,12 @@
     grid-column: span 2;
 }
 
-.input {
+#input {
     height: 36px;
     background-color: antiquewhite;
 }
 
-.output {
+#output {
     height: 36px;
     background-color: aqua;
 }
