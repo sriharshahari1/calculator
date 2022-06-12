@@ -1,26 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=MuseoModerno:wght@200;300;400;500&family=Nunito:wght@200;300;600;800&family=Poppins:wght@100;200;300;400;500;600&family=Roboto:ital,wght@0,400;1,100&display=swap');
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+    background-image: radial-gradient(circle, #470031, #680d3f, #8a1e4b, #ad3055, #cf455c);
+    font-family: 'MuseoModerno', cursive;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0;
+  font-size: 36px;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    font-size: 36px;
+    font-family: 'MuseoModerno', cursive;
+    color: #FF9898;
+    margin-bottom: 48px;
+    padding-top: 8px;
+}
+
+.container {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calulatorOutline {
+    border: 16px solid #971549;
+    background-color: #971549;
+    border-radius: 10px ;
+}
+
+.display {
+    display: flex;
+    flex-direction: column;
+    width: 478px;
+    border: 2px solid #971549;
+    border-radius: 5px;
+}
+
+#ipdisplay {
+    display: flex;
+    justify-content: right;
+    height: 36px;
+    color: #FF9898;
+}
+
+.displayBottom {
+    display: flex;
+    align-items: center;
+    height: 36px;
+}
+
+#input, #output, #cur, #res {
+    display: flex;
+    justify-content: right;
+    width: 240px;
+    color: #FF9898;
+    font-size: 20px;
+}
+
+#cur, #res {
+    font-size: 16px;
+}
+
 .numpad {
+    margin-top: 32px;
     display: grid;
     gap: 1px;
     width: 480px;
     height: 480px;
     grid-template-columns: repeat(4,1fr);
+    gap: 5px;
+}
+
+button {
+    border: 1px solid #FF9898;
+    border-radius: 5px;
+    font-family: 'MuseoModerno', cursive;
+    color: #FF9898;
+    background-color: #CF455C;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.operator{
+    color: #CF455C;
+    background-color: #FF9898;
+    border: 1px solid #CF455C;
+}
+
+.operator:hover{
+    color: #FF9898;
+    background-color: #CF455C;
+    border: 1px solid #FF9898;
+}
+
+button:hover {
+    color: #CF455C;
+    background-color: #FF9898;
+    border-color: #CF455C;
+    border: 1px solid #CF455C;
 }
 
 .span2 {
     grid-column: span 2;
 }
 
-#ipdisplay {
-    height: 36px;
-    background-color: aquamarine;
+.footer {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    color: #FF9898;
+    font-family: 'MuseoModerno', cursive;
+    font-size: 16px;
+    padding: 10px;
 }
 
-#input {
-    height: 36px;
-    background-color: antiquewhite;
+a{
+    text-decoration: none;
 }
 
-#output {
-    height: 36px;
-    background-color: aqua;
+a:visited {
+    text-decoration: none;
+    color: #FF9898;
+
 }

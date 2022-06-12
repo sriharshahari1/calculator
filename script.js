@@ -47,9 +47,9 @@ function display (button) {
 
 
 
-//this function is to show each number individually. This helps select 
+//this function is to show the current input being given. Helpful for computing the ops. 
 function displayNumber(button){
-    if(output.textContent.includes('divide by zero not possible')){
+    if(output.textContent.includes('divide by zero not possible') || operator === '=' || ans === Infinity){
         clearDisplay('clear');
     }
     if(input.textContent == '0'){
@@ -61,7 +61,7 @@ function displayNumber(button){
     setEqualsButtonState();
 }
 
-
+//to get num1 and num2 values
 function operate (button) {
     if(num1==='') {
         num1=input.textContent;
@@ -77,7 +77,7 @@ function operate (button) {
     input.textContent='';
 }
 
-
+//all req mathematical operations
 function calculate (num1,num2,operator) {
     if(operator == "+") {
         ans = add(num1,num2);
@@ -97,6 +97,7 @@ function calculate (num1,num2,operator) {
     return ans;
 }
 
+//result of the calculation returned here
 function calcResult(operator) {
     if(operator=="+"){
         result= `${calculate(num1,num2,operator)}`;
@@ -113,6 +114,7 @@ function calcResult(operator) {
     return result;
 }
 
+//for clear and delete button
 function clearDisplay (type) {
     if(type== 'clear'){
         num1='';
@@ -139,6 +141,7 @@ function clearDisplay (type) {
     }
 }
 
+//decimal support
 function displayDecimal(button) {
     if(input.textContent.includes('.')){
         button.setAttribute('disabled','');
@@ -148,6 +151,7 @@ function displayDecimal(button) {
     }
 }
 
+//to disable = button to prevent unneccesary stuff
 function setEqualsButtonState(state) {
     if (operator === '' || state === 'disable') {
       equals.setAttribute('disabled', '');
@@ -156,7 +160,7 @@ function setEqualsButtonState(state) {
     }
   }
 
-
+//event listeners
 let btns = document.querySelectorAll('button');
 function listenButtons () {
    btns.forEach((button) => {
@@ -184,5 +188,29 @@ function listenButtons () {
             }
         })
     })
+
+    //keyboard support
+    let operatorsObj = {
+        '/': '/',
+        '*': '*',
+        '-': '-',
+        '+': '+',
+      };
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          document.getElementById('clear').click();
+        } else if (event.key === 'Backspace') {
+          document.getElementById('delete').click();
+        } else if (event.key === 'Enter') {
+          event.preventDefault();
+          document.getElementById('=').click();
+        } else if (event.key === '.') {
+          document.getElementById('.').click();
+        } else if (event.key in operatorsObj) {
+          document.getElementById(operatorsObj[event.key]).click();
+        } else if (event.key >= 0 && event.key <= 9) {
+          document.getElementById(event.key).click();
+        }
+      });
 }
 listenButtons();
