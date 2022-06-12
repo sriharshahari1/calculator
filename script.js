@@ -1,6 +1,9 @@
+//declarations
+let ipdisplay=document.getElementById('ipdisplay');
 let input=document.getElementById('input');
 let output=document.getElementById('output');
 let equals=document.getElementById('=');
+let deletebtn=document.getElementById('delete');
 let num1='';
 let num2='';
 let operator='';
@@ -21,12 +24,30 @@ div = (num1,num2) => {
     }
 }
 
+//function to round decimal values to 3 digits
 function roundNumber(calculation) {
     let rounded = Math.round(calculation * 1000) / 1000;
     return rounded;
 }
 
 
+//function for the main display to show all the inputs given
+function display (button) {
+    if(ipdisplay.textContent.includes(' ')){
+        ipdisplay.textContent=output.textContent;
+    }
+    if(button.id==='='){
+        ipdisplay.textContent+=button.textContent;
+        ipdisplay.textContent+=' ';
+    }
+    else if(button.classList.contains('number') || button.classList.contains('operator')){
+        ipdisplay.textContent+=button.textContent;
+    }
+}
+
+
+
+//this function is to show each number individually. This helps select 
 function displayNumber(button){
     if(output.textContent.includes('divide by zero not possible')){
         clearDisplay('clear');
@@ -44,17 +65,13 @@ function displayNumber(button){
 function operate (button) {
     if(num1==='') {
         num1=input.textContent;
-        console.log(num1);
         operator=button.id;
     }
     else if(num1 !=='' && operator !== ''){
         num2=input.textContent;
         output.textContent = calcResult(operator);
         num1=calculate(num1,num2,operator);
-        console.log("num2:" + num2);
-        console.log("num1:" + num1);
         operator=button.id;
-        console.log(operator);  
     }
     setEqualsButtonState('disable');
     input.textContent='';
@@ -82,16 +99,16 @@ function calculate (num1,num2,operator) {
 
 function calcResult(operator) {
     if(operator=="+"){
-        result= `${num1} + ${num2} = ${calculate(num1,num2,operator)}`;
+        result= `${calculate(num1,num2,operator)}`;
     }
     if(operator=="-"){
-        result= `${num1} - ${num2} = ${calculate(num1,num2,operator)}`;
+        result= `${calculate(num1,num2,operator)}`;
     }
     if(operator=="*"){
-        result= `${num1} x ${num2} = ${calculate(num1,num2,operator)}`;
+        result= `${calculate(num1,num2,operator)}`;
     }
     if(operator=="/"){
-        result= `${num1} / ${num2} = ${calculate(num1,num2,operator)}`;
+        result= `${calculate(num1,num2,operator)}`;
     }
     return result;
 }
@@ -102,6 +119,7 @@ function clearDisplay (type) {
         num2='';
         operator='';
         result='';
+        ipdisplay.textContent='';
         input.textContent='';
         output.textContent='';
         result='';
@@ -109,6 +127,15 @@ function clearDisplay (type) {
     }
     else if(type == 'delete'){
         input.textContent=input.textContent.slice(0,-1);
+        if(ipdisplay.textContent.slice(-1) !== 'x' &&
+           ipdisplay.textContent.slice(-1) !== '+' && 
+           ipdisplay.textContent.slice(-1) !== '-'&&
+           ipdisplay.textContent.slice(-1) !== '÷' &&
+           ipdisplay.textContent.slice(-1) !== ' ' &&
+           ipdisplay.textContent.slice(-1) !== ' ')
+           {
+            ipdisplay.textContent=ipdisplay.textContent.slice(0,-1);
+        }
     }
 }
 
@@ -136,12 +163,15 @@ function listenButtons () {
        button.addEventListener('click', () => {
            if(button.classList.contains('number')){
                 displayNumber(button);
+                display(button);
             }
             else if(button.classList.contains('operator')){
                 operate(button);
+                display(button);
             }
             else if(button.id === '='){
                 operate(button);
+                display(button);
             }
             else if(button.id === 'clear'){
                 clearDisplay('clear');

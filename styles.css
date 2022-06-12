@@ -10,6 +10,11 @@
     grid-column: span 2;
 }
 
+#ipdisplay {
+    height: 36px;
+    background-color: aquamarine;
+}
+
 #input {
     height: 36px;
     background-color: antiquewhite;
